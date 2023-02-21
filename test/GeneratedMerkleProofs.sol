@@ -1,0 +1,78 @@
+// SPDX-License-Identifier: UNLICENSED
+pragma solidity ^0.8.17;
+
+contract GeneratedMerkleProofs {
+  // merkle root for punks [280, 283, 742, 944, 1211, 1231, 1259, 1274, 1380]
+  bytes32 constant itemsChecksum =
+    0x5843f3132d592577d7d9d64338f2a472c2633f983dca572971f560c21317a24a;
+
+  // proof for punk 280
+  bytes32[] proof280 = [
+    bytes32(0x8578dec3a67e7958cbaf1c107c9cc5bc02ef32c21e168feb34624eda0e7c58ae),
+    0x49c84423a4cb431702c3049fbf949444f993611cc9f009f2c3340178c0340f06,
+    0x6e96637e415da6c17b39a9060216a5e8d420ef9baa474389e1aeca017987de8c,
+    0xfb6fe5c54df4e4b3093e430a7ddb462864ec8ddc01569601ae1180c973cb1926
+  ];
+
+  // proof for punk 283
+  bytes32[] proof283 = [
+    bytes32(0x0bec47b7f924e2ab9dc7c55ed0435f6895f1a8a34439d69690997cb3a45a9dcc),
+    0xb4f9dbd86e79464ccd852bfff276b8ff2d73f16796efceac8cabceaf3054da44,
+    0x05fc0c862cab1754d31fcb7ac0e9d3753ad293e2c54e468449a2bb8e5fdc0d7d,
+    0xfb6fe5c54df4e4b3093e430a7ddb462864ec8ddc01569601ae1180c973cb1926
+  ];
+
+  // proof for punk 742
+  bytes32[] proof742 = [
+    bytes32(0x263ae29a7ee8fc7cef27cbc845e4eaf7bfb3db9ae2963e8178078aef81d28471),
+    0xcbd79ba91a6aee602ece31d530892a3414e675f3e88e20925b35b73950c307ba,
+    0x05fc0c862cab1754d31fcb7ac0e9d3753ad293e2c54e468449a2bb8e5fdc0d7d,
+    0xfb6fe5c54df4e4b3093e430a7ddb462864ec8ddc01569601ae1180c973cb1926
+  ];
+
+  // proof for punk 944
+  bytes32[] proof944 = [
+    bytes32(0x1602949b6a84a704c7a81815a36f6a6f1fa73b01dfc68b6dff0fdf23198d7c90),
+    0xb4f9dbd86e79464ccd852bfff276b8ff2d73f16796efceac8cabceaf3054da44,
+    0x05fc0c862cab1754d31fcb7ac0e9d3753ad293e2c54e468449a2bb8e5fdc0d7d,
+    0xfb6fe5c54df4e4b3093e430a7ddb462864ec8ddc01569601ae1180c973cb1926
+  ];
+
+  // proof for punk 1211
+  bytes32[] proof1211 = [
+    bytes32(0x7cccebf0459312d56cc98f63c105ebf1c37d6c14b8674857d5d3a6dd7a56c9ad),
+    0x43f96a038cf3b0e38e104d06cefb53566acce56b4b4012febe8b8cac209ba400,
+    0x6e96637e415da6c17b39a9060216a5e8d420ef9baa474389e1aeca017987de8c,
+    0xfb6fe5c54df4e4b3093e430a7ddb462864ec8ddc01569601ae1180c973cb1926
+  ];
+
+  // proof for punk 1231
+  bytes32[] proof1231 = [
+    bytes32(0x734bd98a56e2f63ab817d34b155bce1aa9c3a812137dfd6beb179642e584134a),
+    0x43f96a038cf3b0e38e104d06cefb53566acce56b4b4012febe8b8cac209ba400,
+    0x6e96637e415da6c17b39a9060216a5e8d420ef9baa474389e1aeca017987de8c,
+    0xfb6fe5c54df4e4b3093e430a7ddb462864ec8ddc01569601ae1180c973cb1926
+  ];
+
+  // proof for punk 1259
+  bytes32[] proof1259 = [
+    bytes32(0x039e5200f0c8b5735bff2c391b2c9f1f6fbf99a1f85cb220f5a7e9e32df225c3)
+  ];
+
+  // proof for punk 1274
+  bytes32[] proof1274 = [
+    bytes32(0x98e7deb247cc158d01ecf635e1727d4c1ad65177ed51d3c365b299b8a5e12e24),
+    0x49c84423a4cb431702c3049fbf949444f993611cc9f009f2c3340178c0340f06,
+    0x6e96637e415da6c17b39a9060216a5e8d420ef9baa474389e1aeca017987de8c,
+    0xfb6fe5c54df4e4b3093e430a7ddb462864ec8ddc01569601ae1180c973cb1926
+  ];
+
+  // proof for punk 1380
+  bytes32[] proof1380 = [
+    bytes32(0x426f9d948949e618749715c3d18bec008fe477b7d6c36eaa663a5588ece4f98b),
+    0xcbd79ba91a6aee602ece31d530892a3414e675f3e88e20925b35b73950c307ba,
+    0x05fc0c862cab1754d31fcb7ac0e9d3753ad293e2c54e468449a2bb8e5fdc0d7d
+    // commenting last hash to test invalid proof
+    // 0xfb6fe5c54df4e4b3093e430a7ddb462864ec8ddc01569601ae1180c973cb1926
+  ];
+}
