@@ -6,6 +6,9 @@ import {MerkleProofLib} from "solmate/utils/MerkleProofLib.sol";
 import {IWETH9} from "./interfaces/IWETH9.sol";
 import {ICryptoPunksMarket} from "./interfaces/ICryptoPunksMarket.sol";
 
+error InvalidOffer();
+error InvalidBid();
+
 /// @title The punk.bid v1 contract
 /// @notice A permissionless and on-chain bid-side order book for CryptoPunks  
 contract PunkBidMarketV1 is Owned {
@@ -144,7 +147,7 @@ contract PunkBidMarketV1 is Owned {
       CRYPTOPUNKS_MARKET
     ).punksOfferedForSale(punkIndex);
     if (!offer.isForSale || msg.sender != offer.seller || offer.minValue > 0)
-      revert();
+      revert InvalidOffer();
 
     Bid memory bid = bids[bidId];
     if (
@@ -155,7 +158,7 @@ contract PunkBidMarketV1 is Owned {
         bid.itemsChecksum,
         keccak256(abi.encodePacked(punkIndex))
       )
-    ) revert();
+    ) revert InvalidBid();
 
     IWETH9(WETH).transferFrom(bid.bidder, address(this), bid.weiAmount);
     IWETH9(WETH).withdraw(bid.weiAmount);

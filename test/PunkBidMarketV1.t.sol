@@ -3,7 +3,7 @@ pragma solidity 0.8.17;
 
 import "forge-std/Test.sol";
 import {GeneratedMerkleProofs} from "./GeneratedMerkleProofs.sol";
-import {PunkBidMarketV1} from "../src/PunkBidMarketV1.sol";
+import {PunkBidMarketV1, InvalidOffer, InvalidBid} from "../src/PunkBidMarketV1.sol";
 import {ICryptoPunksMarket} from "../src/interfaces/ICryptoPunksMarket.sol";
 import {IWETH9} from "../src/interfaces/IWETH9.sol";
 
@@ -147,7 +147,7 @@ contract PunkBidMarketV1Test is Test, GeneratedMerkleProofs {
   function testAcceptBidOnUnlistedPunk() public {
     uint256 bidId = _enterBidHoax(5 ether, 5 ether, 5 ether, 100_000_000_000);
     vm.startPrank(holder);
-    vm.expectRevert();
+    vm.expectRevert(InvalidOffer.selector);
     market.acceptBid(283, 5 ether, bidId, proof283);
     vm.stopPrank();
   }
@@ -157,7 +157,7 @@ contract PunkBidMarketV1Test is Test, GeneratedMerkleProofs {
     uint256 bidId = _enterBidHoax(5 ether, 5 ether, 5 ether, 100_000_000_000);
     vm.prank(holder);
     ICryptoPunksMarket(cryptopunksMarket).offerPunkForSale(punkIndex, 0);
-    vm.expectRevert();
+    vm.expectRevert(InvalidOffer.selector);
     market.acceptBid(punkIndex, 5 ether, bidId, proof742);
   }
 
@@ -166,7 +166,7 @@ contract PunkBidMarketV1Test is Test, GeneratedMerkleProofs {
     uint256 bidId = _enterBidHoax(5 ether, 5 ether, 5 ether, 100_000_000_000);
     vm.startPrank(holder);
     ICryptoPunksMarket(cryptopunksMarket).offerPunkForSale(punkIndex, 1);
-    vm.expectRevert();
+    vm.expectRevert(InvalidOffer.selector);
     market.acceptBid(punkIndex, 5 ether, bidId, proof944);
     vm.stopPrank();
   }
@@ -176,7 +176,7 @@ contract PunkBidMarketV1Test is Test, GeneratedMerkleProofs {
     uint256 bidId = _enterBidHoax(5 ether, 5 ether, 5 ether, 100_000_000_000);
     vm.startPrank(holder);
     ICryptoPunksMarket(cryptopunksMarket).offerPunkForSale(punkIndex, 0);
-    vm.expectRevert();
+    vm.expectRevert(InvalidBid.selector);
     market.acceptBid(punkIndex, 6 ether, bidId, proof1211);
     vm.stopPrank();
   }
@@ -206,7 +206,7 @@ contract PunkBidMarketV1Test is Test, GeneratedMerkleProofs {
     uint256 bidId = _enterBidHoax(5 ether, 5 ether, 5 ether, 0);
     vm.startPrank(holder);
     ICryptoPunksMarket(cryptopunksMarket).offerPunkForSale(punkIndex, 0);
-    vm.expectRevert();
+    vm.expectRevert(InvalidBid.selector);
     market.acceptBid(punkIndex, 5 ether, bidId, proof1274);
     vm.stopPrank();
   }
@@ -216,7 +216,7 @@ contract PunkBidMarketV1Test is Test, GeneratedMerkleProofs {
     uint256 bidId = _enterBidHoax(5 ether, 5 ether, 5 ether, 100_000_000_000);
     vm.startPrank(holder);
     ICryptoPunksMarket(cryptopunksMarket).offerPunkForSale(punkIndex, 0);
-    vm.expectRevert();
+    vm.expectRevert(InvalidBid.selector);
     market.acceptBid(punkIndex, 5 ether, bidId, proof1380);
     vm.stopPrank();
   }
