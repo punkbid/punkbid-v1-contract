@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: UNLICENSED
-pragma solidity ^0.8.17;
+pragma solidity 0.8.17;
 
 contract GeneratedMerkleProofs {
   // merkle root for punks [280, 283, 742, 944, 1211, 1231, 1259, 1274, 1380]

@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: UNLICENSED
-pragma solidity ^0.8.17;
+pragma solidity 0.8.17;
 
 import {Owned} from "solmate/auth/Owned.sol";
 import {MerkleProofLib} from "solmate/utils/MerkleProofLib.sol";
