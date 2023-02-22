@@ -6,11 +6,16 @@ import {MerkleProofLib} from "solmate/utils/MerkleProofLib.sol";
 import {IWETH9} from "./interfaces/IWETH9.sol";
 import {ICryptoPunksMarket} from "./interfaces/ICryptoPunksMarket.sol";
 
+/// @title The punk.bid v1 contract
+/// @notice A permissionless and on-chain bid-side order book for CryptoPunks  
 contract PunkBidMarketV1 is Owned {
+  /// @notice The WETH contract
   address public immutable WETH;
 
+  /// @notice The CryptoPunks Market contract
   address public immutable CRYPTOPUNKS_MARKET;
 
+  /// @notice The protocol fee earned on every sales 
   uint256 public immutable FEE = 0.25 ether;
 
   struct Bid {
@@ -25,10 +30,13 @@ contract PunkBidMarketV1 is Owned {
     uint256 weiAmount;
   }
 
+  /// @notice A mapping pointing bid ids to bid structs
   mapping(uint256 => Bid) public bids;
 
+  /// @notice The next bid id to be created
   uint256 public nextBidId = 1;
 
+  /// @notice Emitted when a bid is entered
   event BidEntered(
     uint256 indexed bidId,
     address indexed bidder,
@@ -39,10 +47,13 @@ contract PunkBidMarketV1 is Owned {
     bytes cartMetadata
   );
 
+  /// @notice Emitted when a bid is updated
   event BidUpdated(uint256 indexed bidId, uint256 weiAmount);
 
+  /// @notice Emitted when a bid is cancelled
   event BidCancelled(uint256 indexed bidId);
 
+  /// @notice Emitted when a bid is filled
   event BidFilled(
     uint256 indexed bidId,
     uint256 punkIndex,
@@ -58,6 +69,13 @@ contract PunkBidMarketV1 is Owned {
 
   receive() external payable {}
 
+  /// @notice Enter a new bid
+  /// @param weiAmount The amount to bid on
+  /// @param expiration The expiration date
+  /// @param itemsChecksum The root hash of a merkle tree where each leaf is a hashed punk id
+  /// @param name the name of your bid
+  /// @param cartMetadata The metadata needed to infer the punks included in your bid
+  /// @dev for more info on the cartMetadata format, see https://github.com/punkbid/punkbid-js-sdk
   function enterBid(
     uint256 weiAmount,
     uint96 expiration,
@@ -77,6 +95,8 @@ contract PunkBidMarketV1 is Owned {
     );
   }
 
+  /// @notice Update the price of your bids
+  /// @param updates The ids of the bids to update along with their new price
   function updateBids(BidUpdate[] calldata updates) external {
     uint len = updates.length;
 
@@ -92,6 +112,8 @@ contract PunkBidMarketV1 is Owned {
     }
   }
 
+  /// @notice Cancel your bids
+  /// @param bidIds The ids of the bids to cancel
   function cancelBids(uint256[] calldata bidIds) external {
     uint len = bidIds.length;
 
@@ -107,6 +129,11 @@ contract PunkBidMarketV1 is Owned {
     }
   }
 
+  /// @notice Accept a bid and sell your punk
+  /// @param punkIndex The id of the punk to be sold
+  /// @param minWeiAmount The minimum amount of sale
+  /// @param bidId The id of the bid to be sold into
+  /// @param proof The merkle proof to validate the bid includes the punk to be sold
   function acceptBid(
     uint256 punkIndex,
     uint256 minWeiAmount,
