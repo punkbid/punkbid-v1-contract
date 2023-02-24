@@ -101,9 +101,9 @@ contract PunkBidMarketV1 is Owned {
   /// @notice Update the price of your bids
   /// @param updates The ids of the bids to update along with their new price
   function updateBids(BidUpdate[] calldata updates) external {
-    uint len = updates.length;
+    uint256 len = updates.length;
 
-    for (uint i = 0; i < len; ) {
+    for (uint256 i = 0; i < len; ) {
       BidUpdate calldata update = updates[i];
       require(bids[update.bidId].bidder == msg.sender);
       bids[update.bidId].weiAmount = update.weiAmount;
@@ -118,9 +118,9 @@ contract PunkBidMarketV1 is Owned {
   /// @notice Cancel your bids
   /// @param bidIds The ids of the bids to cancel
   function cancelBids(uint256[] calldata bidIds) external {
-    uint len = bidIds.length;
+    uint256 len = bidIds.length;
 
-    for (uint i = 0; i < len; ) {
+    for (uint256 i = 0; i < len; ) {
       uint256 bidId = bidIds[i];
       require(bids[bidId].bidder == msg.sender);
       delete bids[bidId];
