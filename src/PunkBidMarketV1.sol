@@ -18,7 +18,7 @@ contract PunkBidMarketV1 is Owned {
   /// @notice The CryptoPunks Market contract
   address public immutable CRYPTOPUNKS_MARKET;
 
-  /// @notice The protocol fee earned on every sales 
+  /// @notice The protocol fee earned on every sale
   uint256 public immutable FEE = 0.25 ether;
 
   struct Bid {
