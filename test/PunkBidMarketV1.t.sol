@@ -22,10 +22,10 @@ contract PunkBidMarketV1Test is Test, GeneratedMerkleProofs {
   event BidEntered(
     uint256 indexed bidId,
     address indexed bidder,
-    uint96 expiration,
     uint256 weiAmount,
-    string name,
+    uint96 expiration,
     bytes32 itemsChecksum,
+    string name,
     bytes cartMetadata
   );
   event BidUpdated(uint256 indexed bidId, uint256 weiAmount);
@@ -34,7 +34,7 @@ contract PunkBidMarketV1Test is Test, GeneratedMerkleProofs {
     uint256 indexed bidId,
     uint256 punkIndex,
     address seller,
-    address buyer,
+    address bidder,
     uint256 weiAmount
   );
 
@@ -70,7 +70,7 @@ contract PunkBidMarketV1Test is Test, GeneratedMerkleProofs {
 
   function testEnterBid() public {
     vm.expectEmit(true, true, false, true);
-    emit BidEntered(1, address(this), expiration, 1 ether, bidName, itemsChecksum, cartMetadata);
+    emit BidEntered(1, address(this), 1 ether, expiration, itemsChecksum, bidName, cartMetadata);
     market.enterBid(1 ether, expiration, itemsChecksum, bidName, cartMetadata);
 
     (

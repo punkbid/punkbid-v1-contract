@@ -19,7 +19,7 @@ contract PunkBidMarketV1 is Owned {
   address public immutable CRYPTOPUNKS_MARKET;
 
   /// @notice The protocol fee earned on every sale
-  uint256 public immutable FEE = 0.25 ether;
+  uint256 public constant FEE = 0.25 ether;
 
   struct Bid {
     address bidder;
@@ -43,10 +43,10 @@ contract PunkBidMarketV1 is Owned {
   event BidEntered(
     uint256 indexed bidId,
     address indexed bidder,
-    uint96 expiration,
     uint256 weiAmount,
-    string name,
+    uint96 expiration,
     bytes32 itemsChecksum,
+    string name,
     bytes cartMetadata
   );
 
@@ -61,7 +61,7 @@ contract PunkBidMarketV1 is Owned {
     uint256 indexed bidId,
     uint256 punkIndex,
     address seller,
-    address buyer,
+    address bidder,
     uint256 weiAmount
   );
 
@@ -90,10 +90,10 @@ contract PunkBidMarketV1 is Owned {
     emit BidEntered(
       nextBidId++,
       msg.sender,
-      expiration,
       weiAmount,
-      name,
+      expiration,
       itemsChecksum,
+      name,
       cartMetadata
     );
   }
@@ -165,10 +165,10 @@ contract PunkBidMarketV1 is Owned {
     ICryptoPunksMarket(CRYPTOPUNKS_MARKET).buyPunk(punkIndex);
     ICryptoPunksMarket(CRYPTOPUNKS_MARKET).transferPunk(bid.bidder, punkIndex);
 
-    emit BidFilled(bidId, punkIndex, offer.seller, bid.bidder, bid.weiAmount);
+    emit BidFilled(bidId, punkIndex, msg.sender, bid.bidder, bid.weiAmount);
     delete bids[bidId];
 
-    (bool sent, ) = offer.seller.call{value: bid.weiAmount - FEE}(new bytes(0));
+    (bool sent, ) = msg.sender.call{value: bid.weiAmount - FEE}(new bytes(0));
     require(sent);
   }
 
