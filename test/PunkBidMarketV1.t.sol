@@ -127,7 +127,7 @@ contract PunkBidMarketV1Test is Test, GeneratedMerkleProofs {
     uint256 bidId = _enterBidHoax(5 ether, 5 ether, 5 ether, 100_000_000_000);
     vm.startPrank(holder);
     deal(holder, 0);
-    ICryptoPunksMarket(cryptopunksMarket).offerPunkForSale(280, 0);
+    ICryptoPunksMarket(cryptopunksMarket).offerPunkForSaleToAddress(280, 0, address(market));
     vm.expectEmit(true, false, false, true);
     emit BidFilled(bidId, 280, holder, bidder, 5 ether);
     market.acceptBid(280, 5 ether, bidId, proof280);
@@ -156,7 +156,7 @@ contract PunkBidMarketV1Test is Test, GeneratedMerkleProofs {
     uint256 punkIndex = 742;
     uint256 bidId = _enterBidHoax(5 ether, 5 ether, 5 ether, 100_000_000_000);
     vm.prank(holder);
-    ICryptoPunksMarket(cryptopunksMarket).offerPunkForSale(punkIndex, 0);
+    ICryptoPunksMarket(cryptopunksMarket).offerPunkForSaleToAddress(punkIndex, 0, address(market));
     vm.expectRevert(InvalidOffer.selector);
     market.acceptBid(punkIndex, 5 ether, bidId, proof742);
   }
@@ -165,7 +165,7 @@ contract PunkBidMarketV1Test is Test, GeneratedMerkleProofs {
     uint256 punkIndex = 944;
     uint256 bidId = _enterBidHoax(5 ether, 5 ether, 5 ether, 100_000_000_000);
     vm.startPrank(holder);
-    ICryptoPunksMarket(cryptopunksMarket).offerPunkForSale(punkIndex, 1);
+    ICryptoPunksMarket(cryptopunksMarket).offerPunkForSaleToAddress(punkIndex, 1, address(market));
     vm.expectRevert(InvalidOffer.selector);
     market.acceptBid(punkIndex, 5 ether, bidId, proof944);
     vm.stopPrank();
@@ -175,7 +175,7 @@ contract PunkBidMarketV1Test is Test, GeneratedMerkleProofs {
     uint256 punkIndex = 1211;
     uint256 bidId = _enterBidHoax(5 ether, 5 ether, 5 ether, 100_000_000_000);
     vm.startPrank(holder);
-    ICryptoPunksMarket(cryptopunksMarket).offerPunkForSale(punkIndex, 0);
+    ICryptoPunksMarket(cryptopunksMarket).offerPunkForSaleToAddress(punkIndex, 0, address(market));
     vm.expectRevert(InvalidBid.selector);
     market.acceptBid(punkIndex, 6 ether, bidId, proof1211);
     vm.stopPrank();
@@ -185,7 +185,7 @@ contract PunkBidMarketV1Test is Test, GeneratedMerkleProofs {
     uint256 punkIndex = 1231;
     uint256 bidId = _enterBidHoax(5 ether, 6 ether, 6 ether, 100_000_000_000);
     vm.startPrank(holder);
-    ICryptoPunksMarket(cryptopunksMarket).offerPunkForSale(punkIndex, 0);
+    ICryptoPunksMarket(cryptopunksMarket).offerPunkForSaleToAddress(punkIndex, 0, address(market));
     vm.expectRevert();
     market.acceptBid(punkIndex, 6 ether, bidId, proof1231);
     vm.stopPrank();
@@ -195,7 +195,7 @@ contract PunkBidMarketV1Test is Test, GeneratedMerkleProofs {
     uint256 punkIndex = 1259;
     uint256 bidId = _enterBidHoax(5 ether, 4 ether, 5 ether, 100_000_000_000);
     vm.startPrank(holder);
-    ICryptoPunksMarket(cryptopunksMarket).offerPunkForSale(punkIndex, 0);
+    ICryptoPunksMarket(cryptopunksMarket).offerPunkForSaleToAddress(punkIndex, 0, address(market));
     vm.expectRevert();
     market.acceptBid(punkIndex, 5 ether, bidId, proof1259);
     vm.stopPrank();
@@ -205,7 +205,7 @@ contract PunkBidMarketV1Test is Test, GeneratedMerkleProofs {
     uint256 punkIndex = 1274;
     uint256 bidId = _enterBidHoax(5 ether, 5 ether, 5 ether, 0);
     vm.startPrank(holder);
-    ICryptoPunksMarket(cryptopunksMarket).offerPunkForSale(punkIndex, 0);
+    ICryptoPunksMarket(cryptopunksMarket).offerPunkForSaleToAddress(punkIndex, 0, address(market));
     vm.expectRevert(InvalidBid.selector);
     market.acceptBid(punkIndex, 5 ether, bidId, proof1274);
     vm.stopPrank();
@@ -215,7 +215,7 @@ contract PunkBidMarketV1Test is Test, GeneratedMerkleProofs {
     uint256 punkIndex = 1380;
     uint256 bidId = _enterBidHoax(5 ether, 5 ether, 5 ether, 100_000_000_000);
     vm.startPrank(holder);
-    ICryptoPunksMarket(cryptopunksMarket).offerPunkForSale(punkIndex, 0);
+    ICryptoPunksMarket(cryptopunksMarket).offerPunkForSaleToAddress(punkIndex, 0, address(market));
     vm.expectRevert(InvalidBid.selector);
     market.acceptBid(punkIndex, 5 ether, bidId, proof1380);
     vm.stopPrank();

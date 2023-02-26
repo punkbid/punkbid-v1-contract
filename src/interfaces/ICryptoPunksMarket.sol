@@ -16,10 +16,7 @@ interface ICryptoPunksMarket {
 
   function buyPunk(uint256 punkIndex) external payable;
 
-  function offerPunkForSale(
-    uint256 punkIndex,
-    uint256 minSalePriceInWei
-  ) external;
+  function offerPunkForSaleToAddress(uint256 punkIndex, uint256 minSalePriceInWei, address toAddress) external;
 
   function transferPunk(address to, uint256 punkIndex) external;
 
